@@ -1,6 +1,6 @@
 {
   "name": "@common/game",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Shared game repository, launcher, CMS service, and game stores",
   "type": "module",
   "main": "./dist/index.js",
