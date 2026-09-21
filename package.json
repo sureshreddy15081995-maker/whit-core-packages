@@ -7,7 +7,7 @@
                        "packages/*"
                    ],
     "scripts":  {
-                    "build":  "npm run --workspace @company/shared-ui build \u0026\u0026 npm run --workspace @company/cashier build \u0026\u0026 npm run --workspace @company/profile build \u0026\u0026 npm run --workspace @company/auth build \u0026\u0026 npm run --workspace @company/game build",
+                    "build":  "npm run --workspace @common/shared-ui build \u0026\u0026 npm run --workspace @common/cashier build \u0026\u0026 npm run --workspace @common/profile build \u0026\u0026 npm run --workspace @common/auth build \u0026\u0026 npm run --workspace @common/game build",
                     "typecheck":  "npm run --workspaces --if-present typecheck",
                     "clean":  "npm run --workspaces --if-present clean"
                 },

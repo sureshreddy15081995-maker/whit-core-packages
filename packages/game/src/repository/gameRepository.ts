@@ -1,9 +1,9 @@
 ﻿import type { Provider, AgentProvider, Game, RepositoryQuery } from '../types/game.js';
 import { getCmsUrl, environment } from '../environment.js';
 import { writable } from 'svelte/store';
-import { playerService } from '@company/profile';
+import { playerService } from '@common/profile';
 import { gameCmsService } from '../services/gamecmsService.js';
-import { authStore } from '@company/auth';
+import { authStore } from '@common/auth';
 
 
 export class GameRepository {

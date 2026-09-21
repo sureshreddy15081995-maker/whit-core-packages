@@ -1,5 +1,5 @@
 {
-  "name": "@company/cashier",
+  "name": "@common/cashier",
   "version": "1.0.0",
   "description": "Shared cashier service and store for balance, deposit, and transactions",
   "type": "module",

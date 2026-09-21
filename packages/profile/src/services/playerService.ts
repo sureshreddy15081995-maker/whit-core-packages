@@ -1,7 +1,7 @@
 ﻿import { environment } from '../environment.js';
-import { authStore } from '@company/auth';
-import { cashierStore } from '@company/cashier';
-import { uiStore } from '@company/shared-ui';
+import { authStore } from '@common/auth';
+import { cashierStore } from '@common/cashier';
+import { uiStore } from '@common/shared-ui';
 
 export class PlayerService {
     private providersPromise: Promise<any> | null = null;

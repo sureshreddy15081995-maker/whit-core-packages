@@ -128,11 +128,11 @@ In the project directory:
 cd D:\suresh\suresh\sveltekit\betakwaaba
 
 # Add the same .npmrc pointing to your registry, then install:
-npm install @company/auth@1.0.0
-npm install @company/game@1.0.0
-npm install @company/cashier@1.0.0
-npm install @company/profile@1.0.0
-npm install @company/shared-ui@1.0.0
+npm install @common/auth@1.0.0
+npm install @common/game@1.0.0
+npm install @common/cashier@1.0.0
+npm install @common/profile@1.0.0
+npm install @common/shared-ui@1.0.0
 ```
 
 ---
@@ -163,11 +163,11 @@ cd D:\suresh\suresh\sveltekit\common-ts
 npm run build
 
 # Generate tarballs for each package
-npm pack -w @company/shared-ui
-npm pack -w @company/cashier
-npm pack -w @company/profile
-npm pack -w @company/auth
-npm pack -w @company/game
+npm pack -w @common/shared-ui
+npm pack -w @common/cashier
+npm pack -w @common/profile
+npm pack -w @common/auth
+npm pack -w @common/game
 ```
 Then install in your site:
 ```bash
@@ -181,7 +181,7 @@ npm install ../common-ts/company-auth-1.0.0.tgz
 Each site has its own `skinId` (e.g. `'betakwaaba'`, `'DC2bet'`) and base URL. You can configure this once at app startup in your root layout (e.g. `src/routes/+layout.svelte` or `src/hooks.client.ts`):
 
 ```typescript
-import { setAppEnvironment } from '@company/auth'; // or from @company/game / @company/cashier
+import { setAppEnvironment } from '@common/auth'; // or from @common/game / @common/cashier
 
 setAppEnvironment({
     production: true,
@@ -196,9 +196,9 @@ setAppEnvironment({
 
 ## 💻 4. Code Usage Examples
 
-### 1. Authentication & Validation (`@company/auth`)
+### 1. Authentication & Validation (`@common/auth`)
 ```typescript
-import { LoginService, authStore, validateEmail, validatePassword } from '@company/auth';
+import { LoginService, authStore, validateEmail, validatePassword } from '@common/auth';
 
 // Reactive store subscription
 $authStore.loading;
@@ -211,9 +211,9 @@ const result = await LoginService.onLogin({
 });
 ```
 
-### 2. Game Launch & Repository (`@company/game`)
+### 2. Game Launch & Repository (`@common/game`)
 ```typescript
-import { launchGame, gameStore, gameRepository, activeProviders } from '@company/game';
+import { launchGame, gameStore, gameRepository, activeProviders } from '@common/game';
 
 // Launch a game
 const gameUrl = await launchGame(selectedGame);
@@ -222,9 +222,9 @@ const gameUrl = await launchGame(selectedGame);
 await gameStore.loadData();
 ```
 
-### 3. Cashier & Transactions (`@company/cashier`)
+### 3. Cashier & Transactions (`@common/cashier`)
 ```typescript
-import { cashierService, cashierStore } from '@company/cashier';
+import { cashierService, cashierStore } from '@common/cashier';
 
 // Fetch balance
 await cashierService.onCashierGetBalance();
@@ -233,16 +233,16 @@ await cashierService.onCashierGetBalance();
 $cashierStore.balance;
 ```
 
-### 4. Player Profile (`@company/profile`)
+### 4. Player Profile (`@common/profile`)
 ```typescript
-import { playerService } from '@company/profile';
+import { playerService } from '@common/profile';
 
 await playerService.onPlayerGetProfile();
 ```
 
-### 5. Shared UI & Toasts (`@company/shared-ui`)
+### 5. Shared UI & Toasts (`@common/shared-ui`)
 ```typescript
-import { uiStore } from '@company/shared-ui';
+import { uiStore } from '@common/shared-ui';
 
 // Trigger UI toast or modal
 uiStore.showToast('success', 'Welcome', 'Login successful!');

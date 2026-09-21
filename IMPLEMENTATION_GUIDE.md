@@ -55,11 +55,11 @@ npm install file:../common-ts/packages/game
 This updates `betakwaaba/package.json` with:
 ```json
 "dependencies": {
-  "@company/auth": "file:../common-ts/packages/auth",
-  "@company/cashier": "file:../common-ts/packages/cashier",
-  "@company/game": "file:../common-ts/packages/game",
-  "@company/profile": "file:../common-ts/packages/profile",
-  "@company/shared-ui": "file:../common-ts/packages/shared-ui"
+  "@common/auth": "file:../common-ts/packages/auth",
+  "@common/cashier": "file:../common-ts/packages/cashier",
+  "@common/game": "file:../common-ts/packages/game",
+  "@common/profile": "file:../common-ts/packages/profile",
+  "@common/shared-ui": "file:../common-ts/packages/shared-ui"
 }
 ```
 
@@ -84,11 +84,11 @@ npm publish --workspaces --access restricted
 ```bash
 cd D:\suresh\suresh\sveltekit\betakwaaba
 
-npm install @company/auth@1.0.0
-npm install @company/game@1.0.0
-npm install @company/cashier@1.0.0
-npm install @company/profile@1.0.0
-npm install @company/shared-ui@1.0.0
+npm install @common/auth@1.0.0
+npm install @common/game@1.0.0
+npm install @common/cashier@1.0.0
+npm install @common/profile@1.0.0
+npm install @common/shared-ui@1.0.0
 ```
 
 ---
@@ -101,7 +101,7 @@ Configure this **once** in the site's root layout (`src/routes/+layout.svelte` o
 ### In Betakwaaba (`D:\suresh\suresh\sveltekit\betakwaaba\src\routes\+layout.svelte`):
 ```typescript
 <script lang="ts">
-    import { setAppEnvironment } from '@company/auth';
+    import { setAppEnvironment } from '@common/auth';
 
     setAppEnvironment({
         production: true,
@@ -116,7 +116,7 @@ Configure this **once** in the site's root layout (`src/routes/+layout.svelte` o
 ### In DC2bet (`D:\suresh\suresh\sveltekit\DC2bet\src\routes\+layout.svelte`):
 ```typescript
 <script lang="ts">
-    import { setAppEnvironment } from '@company/auth';
+    import { setAppEnvironment } from '@common/auth';
 
     setAppEnvironment({
         production: true,
@@ -141,7 +141,7 @@ import { validateEmail, validatePassword } from '$lib/utils/validation';
 ```
 #### ✅ After:
 ```typescript
-import { LoginService, authStore, validateEmail, validatePassword } from '@company/auth';
+import { LoginService, authStore, validateEmail, validatePassword } from '@common/auth';
 ```
 
 ---
@@ -155,7 +155,7 @@ import { gameRepository } from '$lib/repository/gameRepository';
 ```
 #### ✅ After:
 ```typescript
-import { launchGame, gameStore, activeProviders, gameRepository } from '@company/game';
+import { launchGame, gameStore, activeProviders, gameRepository } from '@common/game';
 ```
 
 ---
@@ -168,7 +168,7 @@ import { cashierStore } from '$lib/stores/cashierStore';
 ```
 #### ✅ After:
 ```typescript
-import { cashierService, cashierStore } from '@company/cashier';
+import { cashierService, cashierStore } from '@common/cashier';
 ```
 
 ---
@@ -180,7 +180,7 @@ import { playerService } from '$lib/services/playerService';
 ```
 #### ✅ After:
 ```typescript
-import { playerService } from '@company/profile';
+import { playerService } from '@common/profile';
 ```
 
 ---
@@ -192,7 +192,7 @@ import { uiStore } from '$lib/stores/uiStore';
 ```
 #### ✅ After:
 ```typescript
-import { uiStore } from '@company/shared-ui';
+import { uiStore } from '@common/shared-ui';
 ```
 
 ---
@@ -204,7 +204,7 @@ When you add a new feature or fix a bug in `common-ts`:
 1. Edit the file in `common-ts/packages/<package-name>/src/`
 2. Bump the version in `package.json` (e.g. `1.0.0` -> `1.0.1`):
    ```bash
-   npm --workspace @company/auth version patch
+   npm --workspace @common/auth version patch
    ```
 3. Rebuild the packages:
    ```bash
@@ -219,5 +219,5 @@ When you add a new feature or fix a bug in `common-ts`:
 5. Update in your site:
    ```bash
    cd D:\suresh\suresh\sveltekit\betakwaaba
-   npm update @company/auth
+   npm update @common/auth
    ```

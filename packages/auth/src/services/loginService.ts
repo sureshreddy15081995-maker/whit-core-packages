@@ -1,8 +1,8 @@
 ﻿import { environment } from '../environment.js';
 import { authStore } from '../stores/authStore.js';
-import { uiStore } from '@company/shared-ui';
-import { cashierStore } from '@company/cashier';
-import { playerService } from '@company/profile';
+import { uiStore } from '@common/shared-ui';
+import { cashierStore } from '@common/cashier';
+import { playerService } from '@common/profile';
 
 export class LoginService {
     private static httpOptions() {

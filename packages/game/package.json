@@ -1,5 +1,5 @@
 {
-  "name": "@company/game",
+  "name": "@common/game",
   "version": "1.0.0",
   "description": "Shared game repository, launcher, CMS service, and game stores",
   "type": "module",
@@ -33,9 +33,9 @@
     "clean": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\""
   },
   "dependencies": {
-    "@company/auth": "*",
-    "@company/profile": "*",
-    "@company/shared-ui": "*"
+    "@common/auth": "*",
+    "@common/profile": "*",
+    "@common/shared-ui": "*"
   },
   "peerDependencies": {
     "svelte": "^4.0.0 || ^5.0.0"

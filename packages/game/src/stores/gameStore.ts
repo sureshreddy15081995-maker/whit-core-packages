@@ -27,7 +27,7 @@ const initialState: GameState = {
     error: null
 };
 
-import { playerService } from '@company/profile';
+import { playerService } from '@common/profile';
 
 function createGameStore() {
     const { subscribe, set, update } = writable<GameState>(initialState);

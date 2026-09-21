@@ -1,5 +1,5 @@
 {
-  "name": "@company/shared-ui",
+  "name": "@common/shared-ui",
   "version": "1.0.0",
   "description": "Shared UI store and toast state",
   "type": "module",

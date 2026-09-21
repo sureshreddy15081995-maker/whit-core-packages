@@ -1,5 +1,5 @@
 {
-  "name": "@company/profile",
+  "name": "@common/profile",
   "version": "1.0.0",
   "description": "Shared player profile and account service",
   "type": "module",
@@ -25,9 +25,9 @@
     "clean": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\""
   },
   "dependencies": {
-    "@company/auth": "*",
-    "@company/cashier": "*",
-    "@company/shared-ui": "*"
+    "@common/auth": "*",
+    "@common/cashier": "*",
+    "@common/shared-ui": "*"
   },
   "devDependencies": {
     "typescript": "^5.4.0"
