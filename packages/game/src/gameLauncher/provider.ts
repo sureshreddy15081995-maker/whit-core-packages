@@ -54,7 +54,7 @@ const HD_PROVIDER = (endpoint = ""): ProviderConfig => ({
 export const providers: Record<string, ProviderConfig> = {
 
   pragmaticplay: {
-    endpoint: "/rest/pp/ppToken",
+    endpoint: "/rest/pp/ppToken1",
     method: "POST",
     path: (game) => `/${game.gameId || game.tableId}`,
   },
