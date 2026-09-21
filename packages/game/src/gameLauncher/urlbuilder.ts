@@ -68,7 +68,7 @@ const ezugiBuilder =
 
 const builders: Record<string, Builder> = {
 	pragmaticplay: (_, res) =>
-		updateGameUrlLanguage(res.gameURL, (localStorage.getItem('language') || 'EN').toUpperCase()),
+		updateGameUrlLanguage(res.gameURL, ((typeof localStorage !== 'undefined' ? localStorage.getItem('language') : 'EN') || 'EN').toUpperCase()),
 
 	redtiger: ezugiBuilder('EVO_STANDARD_SLOTS_OPERATOR_ID', (g) => g.openTable),
 

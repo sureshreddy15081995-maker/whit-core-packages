@@ -39,7 +39,7 @@ export async function launchGame(
 	const headers: HeadersInit = {
 		'Content-Type': 'application/json',
 		siteId: environment.skinId,
-		Wsession: localStorage.getItem('bet_wSession') ?? '',
+		Wsession: (typeof localStorage !== 'undefined' ? localStorage.getItem('bet_wSession') : '') ?? '',
 		...(config.headers ? config.headers(game) : {})
 	};
 
