@@ -1,0 +1,47 @@
+{
+  "name": "@company/game",
+  "version": "1.0.0",
+  "description": "Shared game repository, launcher, CMS service, and game stores",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./gameLauncher": {
+      "types": "./dist/gameLauncher/launchgame.d.ts",
+      "import": "./dist/gameLauncher/launchgame.js"
+    },
+    "./repository": {
+      "types": "./dist/repository/gameRepository.d.ts",
+      "import": "./dist/repository/gameRepository.js"
+    },
+    "./stores": {
+      "types": "./dist/stores/gameStore.d.ts",
+      "import": "./dist/stores/gameStore.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "clean": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\""
+  },
+  "dependencies": {
+    "@company/auth": "*",
+    "@company/profile": "*",
+    "@company/shared-ui": "*"
+  },
+  "peerDependencies": {
+    "svelte": "^4.0.0 || ^5.0.0"
+  },
+  "devDependencies": {
+    "svelte": "^5.0.0",
+    "typescript": "^5.4.0"
+  }
+}

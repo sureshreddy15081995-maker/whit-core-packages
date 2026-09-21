@@ -1,0 +1,47 @@
+{
+  "name": "@company/auth",
+  "version": "1.0.0",
+  "description": "Shared authentication service, store, and validation utilities",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./services/loginService": {
+      "types": "./dist/services/loginService.d.ts",
+      "import": "./dist/services/loginService.js"
+    },
+    "./stores/authStore": {
+      "types": "./dist/stores/authStore.d.ts",
+      "import": "./dist/stores/authStore.js"
+    },
+    "./utils/validation": {
+      "types": "./dist/utils/validation.d.ts",
+      "import": "./dist/utils/validation.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "clean": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\""
+  },
+  "dependencies": {
+    "@company/cashier": "*",
+    "@company/profile": "*",
+    "@company/shared-ui": "*"
+  },
+  "peerDependencies": {
+    "svelte": "^4.0.0 || ^5.0.0"
+  },
+  "devDependencies": {
+    "svelte": "^5.0.0",
+    "typescript": "^5.4.0"
+  }
+}

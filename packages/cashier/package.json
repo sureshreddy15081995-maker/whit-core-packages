@@ -1,0 +1,38 @@
+{
+  "name": "@company/cashier",
+  "version": "1.0.0",
+  "description": "Shared cashier service and store for balance, deposit, and transactions",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./services/cashierService": {
+      "types": "./dist/services/cashierService.d.ts",
+      "import": "./dist/services/cashierService.js"
+    },
+    "./stores/cashierStore": {
+      "types": "./dist/stores/cashierStore.d.ts",
+      "import": "./dist/stores/cashierStore.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "clean": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\""
+  },
+  "peerDependencies": {
+    "svelte": "^4.0.0 || ^5.0.0"
+  },
+  "devDependencies": {
+    "svelte": "^5.0.0",
+    "typescript": "^5.4.0"
+  }
+}

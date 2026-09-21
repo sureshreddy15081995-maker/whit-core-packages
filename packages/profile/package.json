@@ -1,0 +1,35 @@
+{
+  "name": "@company/profile",
+  "version": "1.0.0",
+  "description": "Shared player profile and account service",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./services/playerService": {
+      "types": "./dist/services/playerService.d.ts",
+      "import": "./dist/services/playerService.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "clean": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\""
+  },
+  "dependencies": {
+    "@company/auth": "*",
+    "@company/cashier": "*",
+    "@company/shared-ui": "*"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}
