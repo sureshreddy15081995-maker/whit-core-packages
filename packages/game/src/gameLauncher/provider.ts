@@ -52,7 +52,7 @@ export const providers: Record<string, ProviderConfig> = {
 
   pragmaticplay: {
     get endpoint() {
-      return environment.api?.games?.pragmatictoken || "/rest/pp/ppToken1";
+      return environment.api?.games?.pragmatictoken || "/rest/pp/ppToken";
     },
     method: "POST",
     path: (game) => `/${game.gameId || game.tableId}`,
