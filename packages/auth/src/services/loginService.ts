@@ -1,29 +1,30 @@
-﻿import { environment } from '../environment.js';
+import { environment } from '../environment.js';
 import { authStore } from '../stores/authStore.js';
 import { uiStore } from '@common/shared-ui';
 import { cashierStore } from '@common/cashier';
 import { playerService } from '@common/profile';
+import { getWSession, setWSession, clearWSession, getSiteId } from '../utils/sessionManager.js';
 
 export class LoginService {
-    private static httpOptions() {
+    private static httpOptions(siteId?: string) {
         return {
             'Content-Type': 'application/json',
-            'siteid': environment.skinId
+            'siteid': getSiteId(siteId)
         };
     }
 
-    static async onLogin(postdata: any) {
+    static async onLogin(postdata: any, siteId?: string) {
         authStore.setLoginStart();
         try {
             const res = await fetch(`${environment.baseUrl}${environment.api.player.login}`, {
                 method: 'POST',
-                headers: this.httpOptions(),
+                headers: this.httpOptions(siteId),
                 body: JSON.stringify(postdata)
             });
             const data = await res.json();
 
             if (data && data.success === true && data.sessionId) {
-                localStorage.setItem('bet_wSession', data.sessionId);
+                setWSession(data.sessionId, siteId);
                 playerService.clearCaches();
                 authStore.setLoginSuccess(data);
                 uiStore.closeLogin();
@@ -48,12 +49,12 @@ export class LoginService {
             return { success: false, error: error.message };
         }
     }
-    static async onRegister(postdata: any) {
+    static async onRegister(postdata: any, siteId?: string) {
         authStore.setRegisterStart();
         try {
             const res = await fetch(`${environment.baseUrl}${environment.api.player.register}`, {
                 method: 'POST',
-                headers: this.httpOptions(),
+                headers: this.httpOptions(siteId),
                 body: JSON.stringify(postdata)
             });
             const data = await res.json();
@@ -61,7 +62,7 @@ export class LoginService {
             if (data && data.success === true) {
                 const sId = data.sessionId || data.loginResponse?.sessionId;
                 if (sId) {
-                    localStorage.setItem('bet_wSession', sId);
+                    setWSession(sId, siteId);
                     playerService.clearCaches();
                     authStore.setRegisterSuccess(data.loginResponse || data);
                     uiStore.closeLogin();
@@ -86,11 +87,11 @@ export class LoginService {
         }
     }
 
-    static async onForgotPassword(postdata: any) {
+    static async onForgotPassword(postdata: any, siteId?: string) {
         try {
             const res = await fetch(`${environment.baseUrl}${environment.api.player.fotgotPassword}`, {
                 method: 'POST',
-                headers: this.httpOptions(),
+                headers: this.httpOptions(siteId),
                 body: JSON.stringify(postdata)
             });
             const data = await res.json();
@@ -108,25 +109,24 @@ export class LoginService {
         }
     }
 
-    static async onLogOut() {
+    static async onLogOut(siteId?: string) {
         try {
-            const wsession = localStorage.getItem('bet_wSession') || '';
+            const wsession = getWSession(siteId);
             const res = await fetch(`${environment.baseUrl}${environment.api.player.logout}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'siteid': environment.skinId,
+                    'siteid': getSiteId(siteId),
                     'wsession': wsession
                 },
                 body: JSON.stringify({})
             });
 
             // Clear Session
-            sessionStorage.clear();
-            localStorage.removeItem('bet_wSession');
-            localStorage.removeItem('bet_oneClickPasswordPending');
-            localStorage.removeItem('bet_oneClickLoginName');
-            localStorage.removeItem('bet_oneClickOldPassword');
+            if (typeof sessionStorage !== 'undefined') {
+                sessionStorage.clear();
+            }
+            clearWSession(siteId);
 
             // Clear PlayerService Caches
             playerService.clearCaches();
@@ -137,17 +137,23 @@ export class LoginService {
             uiStore.reset();
 
             uiStore.showToast('success', 'Authentication', 'Logged out successfully');
-            setTimeout(() => {
-                window.location.reload();
-            }, 800);
+            if (typeof window !== 'undefined') {
+                setTimeout(() => {
+                    window.location.reload();
+                }, 800);
+            }
 
             return { success: true };
         } catch (error: any) {
-            sessionStorage.clear();
-            localStorage.removeItem('bet_wSession');
+            if (typeof sessionStorage !== 'undefined') {
+                sessionStorage.clear();
+            }
+            clearWSession(siteId);
             authStore.reset();
             cashierStore.reset();
-            window.location.reload();
+            if (typeof window !== 'undefined') {
+                window.location.reload();
+            }
             return { success: true };
         }
     }
@@ -162,14 +168,14 @@ export class LoginService {
         }
     }
 
-    static async webAuthVerify(postdata: any) {
+    static async webAuthVerify(postdata: any, siteId?: string) {
         try {
-            const wsession = localStorage.getItem('bet_wSession') || '';
+            const wsession = getWSession(siteId);
             const res = await fetch(`${environment.baseUrl}${environment.api.player.webAuthVerify}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'siteid': environment.skinId,
+                    'siteid': getSiteId(siteId),
                     'wsession': wsession
                 },
                 body: JSON.stringify(postdata)

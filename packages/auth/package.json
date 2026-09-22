@@ -22,6 +22,10 @@
     "./utils/validation": {
       "types": "./dist/utils/validation.d.ts",
       "import": "./dist/utils/validation.js"
+    },
+    "./utils/sessionManager": {
+      "types": "./dist/utils/sessionManager.d.ts",
+      "import": "./dist/utils/sessionManager.js"
     }
   },
   "files": [
