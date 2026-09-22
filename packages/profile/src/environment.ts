@@ -1,4 +1,4 @@
-﻿export interface EnvironmentConfig {
+export interface EnvironmentConfig {
     production: boolean;
     baseUrl: string;
     skinId: string;
@@ -76,7 +76,7 @@ export const defaultEnvironment: EnvironmentConfig = {
             depositCallBackStatus: "/api/cashier/depositCallBackStatus"
         },
         games: {
-            pragmatictoken: "/rest/pp/ppToken",
+            pragmatictoken: "/rest/pp/ppToken1",
             rubyPlayLaunch: "/rest/ruby_play/launch",
             aviatrixGameLaunch: "/rest/aviatrix/launchGame",
             cpgGameLaunch: "/rest/cpg/balance/launchGame",

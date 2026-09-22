@@ -1,4 +1,5 @@
-﻿import { environment, getCmsUrl } from '../environment.js';
+import { environment, getCmsUrl } from '../environment.js';
+import { getWSession, getSiteId } from '@common/auth';
 
 export class GameCmsService {
     private gamesPromise: Promise<any> | null = null;
@@ -13,8 +14,8 @@ export class GameCmsService {
     private httpWsession() {
         return {
             "Content-Type": "application/json",
-            wsession: localStorage.getItem("bet_wSession") || '',
-            siteid: environment.skinId
+            wsession: getWSession(),
+            siteid: getSiteId() || environment.skinId
         };
     }
 
@@ -97,7 +98,7 @@ export class GameCmsService {
             method: 'POST',
             headers: {
                 "Content-Type": "application/json",
-                wsession: localStorage.getItem("bet_wSession") || '',
+                wsession: getWSession(),
                 "mType": mtype,
                 "gType": gtype
             },

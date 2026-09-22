@@ -1,9 +1,10 @@
-﻿// src/lib/gameLauncher/launch.ts
+// src/lib/gameLauncher/launch.ts
 
 import { environment } from '../environment.js';
 import { providers } from './provider.js';
 import type { Game } from './types.js';
 import { buildGameUrl } from './urlbuilder.js';
+import { getWSession, getSiteId } from '@common/auth';
 
 export async function launchGame(
 	game: Game,
@@ -11,22 +12,12 @@ export async function launchGame(
 		baseUrl?: string;
 		fetcher?: typeof fetch;
 	}
-): Promise<string> {
-	if (!game) {
-		throw new Error('Game object is required.');
-	}
-
-	const provider = (
-		game.aggregator ||
-		game.aggrigator || // backward compatibility
-		game.provider ||
-		''
-	).toLowerCase();
-
+) {
+	const provider = (game.provider || game.aggregator || game.gameProvider || '').toLowerCase();
 	const config = providers[provider];
 
 	if (!config) {
-		throw new Error(`Unsupported provider: ${provider}`);
+		throw new Error(`Provider "${provider}" is not supported`);
 	}
 
 	const fetcher = options?.fetcher ?? fetch;
@@ -38,8 +29,8 @@ export async function launchGame(
 
 	const headers: HeadersInit = {
 		'Content-Type': 'application/json',
-		siteId: environment.skinId,
-		Wsession: (typeof localStorage !== 'undefined' ? localStorage.getItem('bet_wSession') : '') ?? '',
+		siteId: getSiteId() || environment.skinId,
+		Wsession: getWSession(),
 		...(config.headers ? config.headers(game) : {})
 	};
 

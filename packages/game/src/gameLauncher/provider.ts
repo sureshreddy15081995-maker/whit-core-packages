@@ -1,11 +1,8 @@
-﻿import type { Game, ProviderConfig } from './types.js';
-// src/lib/gameLauncher/providers.ts
+import type { Game, ProviderConfig } from './types.js';
+import { getWSession } from '@common/auth';
+import { environment } from '../environment.js';
 
-
-
-
-
-const SESSION = () => localStorage.getItem("bet_wSession") || "";
+const SESSION = () => getWSession();
 
 const DEFAULT_GAME_BODY = (game: Game) => ({
   gameId: game.gameId,
@@ -54,7 +51,9 @@ const HD_PROVIDER = (endpoint = ""): ProviderConfig => ({
 export const providers: Record<string, ProviderConfig> = {
 
   pragmaticplay: {
-    endpoint: "/rest/pp/ppToken",
+    get endpoint() {
+      return environment.api?.games?.pragmatictoken || "/rest/pp/ppToken1";
+    },
     method: "POST",
     path: (game) => `/${game.gameId || game.tableId}`,
   },

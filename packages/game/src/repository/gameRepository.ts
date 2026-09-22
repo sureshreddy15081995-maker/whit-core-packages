@@ -1,9 +1,9 @@
-﻿import type { Provider, AgentProvider, Game, RepositoryQuery } from '../types/game.js';
+import type { Provider, AgentProvider, Game, RepositoryQuery } from '../types/game.js';
 import { getCmsUrl, environment } from '../environment.js';
 import { writable } from 'svelte/store';
 import { playerService } from '@common/profile';
 import { gameCmsService } from '../services/gamecmsService.js';
-import { authStore } from '@common/auth';
+import { authStore, getWSession, getSiteId } from '@common/auth';
 
 
 export class GameRepository {
@@ -42,14 +42,12 @@ export class GameRepository {
         this.initPromise = (async () => {
             this.stateStore.update((s) => ({ ...s, loading: true, error: null }));
             try {
-                let wsession = "";
+                let wsession = getWSession();
                 let headers: any = {
                     'Content-Type': 'application/json',
-                    'siteid': environment.skinId,
+                    'siteid': getSiteId() || environment.skinId,
                     'wsession': wsession
                 };
-                wsession = typeof sessionStorage !== 'undefined' ? localStorage.getItem('bet_wSession') || '' : '';
-                headers.wsession = wsession;
 
                 let isDenied = false;
                 let agentProvidersRes: any = [];

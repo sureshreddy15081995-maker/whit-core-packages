@@ -1,6 +1,7 @@
-﻿// src/lib/gameLauncher/urlBuilder.ts
+// src/lib/gameLauncher/urlBuilder.ts
 
 import { environment } from '../environment.js';
+import { getSiteId } from '@common/auth';
 
 function detectEncodingLevel(str: string): number {
 	let level = 0;
@@ -89,7 +90,7 @@ const builders: Record<string, Builder> = {
 		`${res.url}/${game.gameName}` +
 		`?gameId=${game.gameId}` +
 		`&playerToken=${res.token}` +
-		`&site=${environment.skinId}`,
+		`&site=${getSiteId() || environment.skinId}`,
 
 	// 	sportstoken: (_, res) => `https://prod20278-228598233.freethrow777.com/en/spbk?api=/assets/js/btisports.js?v=2&operatorToken=${res.token}
 	// `,
