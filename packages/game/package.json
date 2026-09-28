@@ -1,0 +1,57 @@
+{
+  "name": "@common/game",
+  "version": "1.1.0",
+  "description": "Shared game repository, CAPI repository, launcher, CMS service, Svelte 5 gameplay state, and game stores",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "svelte": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "svelte": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./gameLauncher": {
+      "types": "./dist/gameLauncher/launchgame.d.ts",
+      "default": "./dist/gameLauncher/launchgame.js"
+    },
+    "./state/gameplayState": {
+      "types": "./dist/state/gameplayState.svelte.d.ts",
+      "default": "./dist/state/gameplayState.svelte.js"
+    },
+    "./repository/capiRepository": {
+      "types": "./dist/repository/capiRepository.svelte.d.ts",
+      "default": "./dist/repository/capiRepository.svelte.js"
+    },
+    "./repository": {
+      "types": "./dist/repository/gameRepository.d.ts",
+      "default": "./dist/repository/gameRepository.js"
+    },
+    "./stores": {
+      "types": "./dist/stores/gameStore.d.ts",
+      "default": "./dist/stores/gameStore.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "svelte-package -i src -o dist",
+    "clean": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\""
+  },
+  "dependencies": {
+    "@common/auth": "*",
+    "@common/profile": "*",
+    "@common/shared-ui": "*"
+  },
+  "peerDependencies": {
+    "svelte": "^5.0.0"
+  },
+  "devDependencies": {
+    "@sveltejs/package": "^2.5.8",
+    "svelte": "^5.56.1",
+    "typescript": "^5.4.0"
+  }
+}

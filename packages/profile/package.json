@@ -1,0 +1,41 @@
+{
+  "name": "@common/profile",
+  "version": "1.1.0",
+  "description": "Shared player service, profile management, and account stats",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "svelte": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "svelte": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./services/playerService": {
+      "types": "./dist/services/playerService.d.ts",
+      "default": "./dist/services/playerService.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "svelte-package -i src -o dist",
+    "clean": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\""
+  },
+  "dependencies": {
+    "@common/auth": "*",
+    "@common/cashier": "*",
+    "@common/shared-ui": "*"
+  },
+  "peerDependencies": {
+    "svelte": "^5.0.0"
+  },
+  "devDependencies": {
+    "@sveltejs/package": "^2.5.8",
+    "svelte": "^5.56.1",
+    "typescript": "^5.4.0"
+  }
+}

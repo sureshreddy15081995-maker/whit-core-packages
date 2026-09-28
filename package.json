@@ -1,0 +1,19 @@
+{
+    "name": "common-ts",
+    "version": "1.1.0",
+    "private": true,
+    "description": "Shared TypeScript and Svelte 5 packages for UI, auth, game, cashier, profile, and utils",
+    "workspaces": [
+        "packages/*"
+    ],
+    "scripts": {
+        "build": "npm run --workspace @common/utils build && npm run --workspace @common/shared-ui build && npm run --workspace @common/cashier build && npm run --workspace @common/profile build && npm run --workspace @common/auth build && npm run --workspace @common/game build",
+        "typecheck": "npm run --workspaces --if-present typecheck",
+        "clean": "npm run --workspaces --if-present clean"
+    },
+    "devDependencies": {
+        "@sveltejs/package": "^2.5.8",
+        "svelte": "^5.56.1",
+        "typescript": "^5.4.0"
+    }
+}

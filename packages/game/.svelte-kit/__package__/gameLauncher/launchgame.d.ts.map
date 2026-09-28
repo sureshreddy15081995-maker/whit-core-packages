@@ -1,0 +1,1 @@
+{"version":3,"file":"launchgame.d.ts","sourceRoot":"","sources":["../../src/gameLauncher/launchgame.ts"],"names":[],"mappings":"AAIA,OAAO,KAAK,EAAE,IAAI,EAAE,MAAM,YAAY,CAAC;AAIvC,wBAAsB,UAAU,CAC/B,IAAI,EAAE,IAAI,EACV,OAAO,CAAC,EAAE;IACT,OAAO,CAAC,EAAE,MAAM,CAAC;IACjB,OAAO,CAAC,EAAE,OAAO,KAAK,CAAC;CACvB,mBAsCD"}

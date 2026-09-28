@@ -1,0 +1,57 @@
+{
+  "name": "@common/auth",
+  "version": "1.1.0",
+  "description": "Shared authentication service, store, Svelte 5 reactive auth state, and validation utilities",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "svelte": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "svelte": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./services/loginService": {
+      "types": "./dist/services/loginService.d.ts",
+      "default": "./dist/services/loginService.js"
+    },
+    "./stores/authStore": {
+      "types": "./dist/stores/authStore.d.ts",
+      "default": "./dist/stores/authStore.js"
+    },
+    "./state/authState": {
+      "types": "./dist/state/authState.svelte.d.ts",
+      "default": "./dist/state/authState.svelte.js"
+    },
+    "./utils/validation": {
+      "types": "./dist/utils/validation.d.ts",
+      "default": "./dist/utils/validation.js"
+    },
+    "./utils/sessionManager": {
+      "types": "./dist/utils/sessionManager.d.ts",
+      "default": "./dist/utils/sessionManager.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "svelte-package -i src -o dist",
+    "clean": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\""
+  },
+  "dependencies": {
+    "@common/cashier": "*",
+    "@common/profile": "*",
+    "@common/shared-ui": "*"
+  },
+  "peerDependencies": {
+    "svelte": "^5.0.0"
+  },
+  "devDependencies": {
+    "@sveltejs/package": "^2.5.8",
+    "svelte": "^5.56.1",
+    "typescript": "^5.4.0"
+  }
+}

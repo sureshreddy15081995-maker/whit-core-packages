@@ -1,0 +1,33 @@
+// src/lib/gameLauncher/launch.ts
+import { environment } from '../environment.js';
+import { providers } from './provider.js';
+import { buildGameUrl } from './urlbuilder.js';
+import { getWSession, getSiteId } from '@common/auth';
+export async function launchGame(game, options) {
+    const provider = (game.provider || game.aggregator || game.gameProvider || '').toLowerCase();
+    const config = providers[provider];
+    if (!config) {
+        throw new Error(`Provider "${provider}" is not supported`);
+    }
+    const fetcher = options?.fetcher ?? fetch;
+    const baseUrl = options?.baseUrl ?? '';
+    const endpoint = baseUrl + config.endpoint + (config.path ? config.path(game) : '');
+    const method = config.method;
+    const headers = {
+        'Content-Type': 'application/json',
+        siteId: getSiteId() || environment.skinId,
+        Wsession: getWSession(),
+        ...(config.headers ? config.headers(game) : {})
+    };
+    const body = method === 'POST' ? JSON.stringify(config.body ? config.body(game) : {}) : undefined;
+    const response = await fetcher(endpoint, {
+        method,
+        headers,
+        body
+    });
+    if (!response.ok) {
+        throw new Error(`Launch request failed (${response.status})`);
+    }
+    const result = await response.json();
+    return buildGameUrl(provider, game, result);
+}
