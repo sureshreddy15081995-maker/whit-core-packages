@@ -40,7 +40,7 @@ export class PaymentStrategyFactory {
         async deposit(data, siteId, sessionToken) {
           const res = await fetch('/api/cashier/buy', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', siteId: siteId || '', Wsession: sessionToken || '' },
+            headers: { 'Content-Type': 'application/json', siteId: siteId || '', wsession: sessionToken || '' },
             body: JSON.stringify(data)
           });
           return await res.json();
@@ -48,7 +48,7 @@ export class PaymentStrategyFactory {
         async withdraw(data, siteId, sessionToken) {
           const res = await fetch('/api/cashier/cashout', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json', siteId: siteId || '', Wsession: sessionToken || '' },
+            headers: { 'Content-Type': 'application/json', siteId: siteId || '', wsession: sessionToken || '' },
             body: JSON.stringify(data)
           });
           return await res.json();

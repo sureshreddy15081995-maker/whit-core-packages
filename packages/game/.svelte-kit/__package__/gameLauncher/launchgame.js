@@ -16,7 +16,7 @@ export async function launchGame(game, options) {
     const headers = {
         'Content-Type': 'application/json',
         siteId: getSiteId() || environment.skinId,
-        Wsession: getWSession(),
+        wsession: getWSession(),
         ...(config.headers ? config.headers(game) : {})
     };
     const body = method === 'POST' ? JSON.stringify(config.body ? config.body(game) : {}) : undefined;

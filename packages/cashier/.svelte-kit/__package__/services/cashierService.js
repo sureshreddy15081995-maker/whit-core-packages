@@ -2,18 +2,23 @@
 import { environment } from '../environment.js';
 import { cashierStore } from '../stores/cashierStore.js';
 function getHttpOptions(siteId, sessionToken) {
-    const sId = siteId || environment.skinId || '';
+    const sId = siteId || environment.skinId || 'srmaster';
     let token = sessionToken;
+    if (!token && typeof sessionStorage !== 'undefined') {
+        token = sessionStorage.getItem('wSession') || sessionStorage.getItem('wsession') || sessionStorage.getItem('token') || '';
+    }
     if (!token && typeof localStorage !== 'undefined') {
-        token = localStorage.getItem(`${sId ? sId + '_' : ''}wSession`) ||
+        token = localStorage.getItem(`${sId.toLowerCase()}_wsession`) ||
+            localStorage.getItem(`${sId}_wsession`) ||
             localStorage.getItem('wsession') ||
-            localStorage.getItem('bet_wsession') ||
-            (typeof sessionStorage !== 'undefined' ? sessionStorage.getItem('wSession') : '') || '';
+            localStorage.getItem('wSession') ||
+            localStorage.getItem('token') ||
+            localStorage.getItem('bet_wsession') || '';
     }
     return {
         'Content-Type': 'application/json',
         'siteid': sId,
-        'Wsession': token || ''
+        'wsession': token || ''
     };
 }
 export class CashierService {

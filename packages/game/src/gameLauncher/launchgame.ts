@@ -30,7 +30,7 @@ export async function launchGame(
 	const headers: HeadersInit = {
 		'Content-Type': 'application/json',
 		siteId: getSiteId() || environment.skinId,
-		Wsession: getWSession(),
+		wsession: getWSession(),
 		...(config.headers ? config.headers(game) : {})
 	};
 
